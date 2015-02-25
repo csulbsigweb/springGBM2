@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>reveal.js - The HTML Presentation Framework</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="css/reveal.min.css">
+  <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/zenburn.css">
+
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if (window.location.search.match(/print-pdf/gi)) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'css/print/pdf.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    }
+  </script>
+
+  <!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      <section>
+        <h2>Modularity</h2>
+        <p>The unix philosophy</p>
+        <p>and what it means to write modular code</p>
+      </section>
+
+      <section>
+        <h3>The norm in browser js</h3>
+        <p>Globals exposed everywhere</p>
+      </section>
+
+      <section>
+        <h3>This is not a good paridigm!</h3>
+      </section>
+
+      <section>
+        <h3>A non-browserified app</h3>
+        <pre><code>
+          <script src="jquery.js"></script>
+          <script src="underscore.js"></script>
+          <script>
+            $('.stuff').addClass('moreStuff');
+            var dude = {
+              likesBowling: true,
+              nickName: 'theDude'
+            };
+
+            _.extend(dude, {
+              newStuff: 'i can use underscore'
+            });
+
+            console.log(dude.newStuff); // Outputs: i can use underscore
+          </script>
+        </body>
+        </html>
+        </code></pre>
+      </section>
+
+      <section>
+        <h3>Enter Browserify</h3>
+        <img src="https://camo.githubusercontent.com/85bbf6097b0237b921ef2bb232c2dc807604e865/687474703a2f2f737562737461636b2e6e65742f696d616765732f62726f777365726966792f62726f777365726966792e706e67" alt="browserify logo">
+      </section>
+
+      <section>
+        <h3>What browserified code looks like</h3>
+        <pre><code>
+          var $ = require('jquery');
+          var _ = require('underscore');
+
+          $('.stuff').addClass('moreStuff');
+          var dude = {
+            aka: 'jeff bridges',
+            favDrink: 'white russian'
+          };
+
+          _.extend(dude, {
+            nickname: 'the dude'
+          });
+
+          console.log(dude.nickname);
+        </code></pre>
+
+        <p>Then a simple <pre><code>$ browserify sourcefile.js -o targetfile.js</code></pre></p>
+        <p>And you are good to go!</p>
+      </section>
+
+    </div>
+
+  </div>
+
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.min.js"></script>
+
+  <script>
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+
+      theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+      transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+      // Parallax scrolling
+      // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+      // parallaxBackgroundSize: '2100px 900px',
+
+      // Optional libraries used to extend on reveal.js
+      dependencies: [{
+        src: 'lib/js/classList.js',
+        condition: function() {
+          return !document.body.classList;
+        }
+      }, {
+        src: 'plugin/markdown/marked.js',
+        condition: function() {
+          return !!document.querySelector('[data-markdown]');
+        }
+      }, {
+        src: 'plugin/markdown/markdown.js',
+        condition: function() {
+          return !!document.querySelector('[data-markdown]');
+        }
+      }, {
+        src: 'plugin/highlight/highlight.js',
+        async: true,
+        callback: function() {
+          hljs.initHighlightingOnLoad();
+        }
+      }, {
+        src: 'plugin/zoom-js/zoom.js',
+        async: true,
+        condition: function() {
+          return !!document.body.classList;
+        }
+      }, {
+        src: 'plugin/notes/notes.js',
+        async: true,
+        condition: function() {
+          return !!document.body.classList;
+        }
+      }]
+    });
+  </script>
+
+</body>
+
+</html>
